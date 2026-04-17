@@ -1,2 +1,2 @@
 # warehouseplus
-A warehouse data storage system based on real Amazon data.
+A warehouse data storage system based on real Ikea data.
