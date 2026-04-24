@@ -69,7 +69,8 @@ int main() {
         }
 
         warehouse.price.push_back(parseNumData(dataLine));
-        if (warehouse.price.at(warehouse.price.size() - 1) == -1.0) {
+        if (warehouse.price.at(warehouse.price.size() - 1) <= -0.9 
+        || warehouse.price.at(warehouse.price.size() - 1) >= -1.1) {
             warehouse.price.pop_back();
         }
         
