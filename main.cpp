@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "ikea_item_struct.cpp"
+#include "ikea_data_struct.cpp"
 
 double parseNumData(std::string& s) {
     try {
@@ -46,38 +46,41 @@ int main() {
     std::string dataHeader;
     std::getline(dataFile, dataHeader);
 
-    std::vector<ikeaItem> warehouse;
-    warehouse.reserve(1000);
+    ikeaData warehouse;
 
     int dataLength = 0;
-    int numTries = 0;
     int STOPNUM = 3;
     std::string dataLine;
     while(std::getline(dataFile, dataLine) && dataLength != STOPNUM) {
-        ikeaItem tempItem;
-        numTries++;
 
-        tempItem.id = parseNumData(dataLine);
-        if (tempItem.id == -1) continue;
+        warehouse.id.push_back(parseNumData(dataLine));
+        if (warehouse.id.at(warehouse.id.size() - 1) == -1) {
+            warehouse.id.pop_back();
+        }
+        
+        warehouse.name.push_back(parseStrData(dataLine));
+        if (warehouse.name.at(warehouse.name.size() - 1) == "error") {
+            warehouse.name.pop_back();
+        }
 
-        tempItem.name = parseStrData(dataLine);
-        if (tempItem.name == "error") continue;
+        warehouse.type.push_back(parseStrData(dataLine));
+        if (warehouse.type.at(warehouse.type.size() - 1) == "error") {
+            warehouse.type.pop_back();
+        }
 
-        tempItem.type = parseStrData(dataLine);
-        if (tempItem.type == "error") continue;
-
-        tempItem.price = parseNumData(dataLine);
-        if (tempItem.price == -1.0) continue;
+        warehouse.price.push_back(parseNumData(dataLine));
+        if (warehouse.price.at(warehouse.price.size() - 1) == -1.0) {
+            warehouse.price.pop_back();
+        }
         
         dataLength++;
-        warehouse.push_back(tempItem);
     }
 
-    std::cout << warehouse.at(0).id << ",{"
-              << warehouse.at(0).name << "},["
-              << warehouse.at(0).type << "],"
-              << warehouse.at(0).price << " >"
-              << numTries << std::endl;
+    std::cout << warehouse.id.at(0) << ",{"
+              << warehouse.name.at(0) << "},["
+              << warehouse.type.at(0) << "],"
+              << warehouse.price.at(0) << " >"
+              << dataLength << std::endl;
 
     dataFile.close();
 
