@@ -1,7 +1,4 @@
 #include <string>
+#include "ikea_data_struct.h"
 
-void insertionSort(int wh[], int n = -1);
-
-void insertionSort(std::string wh[], int n = -1);
-
-void insertionSort(double wh[], int n = -1);
+void insertionSort(ikeaData& wh, std::string sortBy, int n = -1);
