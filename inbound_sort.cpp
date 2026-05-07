@@ -1,9 +1,9 @@
-#include "insertion_sort_warehouse.h"
+#include "inbound_sort.h"
 
-void insertionSort(ikeaData& wh, std::string sortBy, int n) {
-    if (n == -1) n = wh.id.size();
+void inboundSort(ikeaData& wh, std::string sortBy, size_t stopNum) {
+    if (stopNum == 0) stopNum = wh.id.size();
     
-    for (int i = 1; i < n; ++i) {
+    for (int i = 1; i < stopNum; ++i) {
         int keyI = wh.id[i];
         std::string keyN = wh.name[i];
         std::string keyT = wh.type[i];

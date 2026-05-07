@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "ikea_data_struct.h"
-#include "insertion_sort_warehouse.h"
+#include "inbound_sort.h"
 #include "read_csv_file.h"
 
 int main() {
@@ -14,7 +14,7 @@ int main() {
     ikeaData warehouse;
     readCSVFile(warehouse, dataFileName);
 
-    insertionSort(warehouse, "price");
+    // inboundSort(warehouse, "price");
 
     unsigned int printStop = 10;
     for (unsigned int i = 0; i < printStop; ++i) {

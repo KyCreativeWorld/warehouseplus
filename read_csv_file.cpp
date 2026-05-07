@@ -3,9 +3,10 @@
 double parseNumData(std::string& s) {
     try {
         short fIndex = s.find(',');
-        std::string s2 = s.substr(0, fIndex);
+        std::string_view s2 = s;
+        s2 = s2.substr(0, fIndex);
         s = s.substr(fIndex + 1);
-        return (std::stod(s2));
+        return -1.0;
     } catch (std::invalid_argument e) {
         e.what();
     }
