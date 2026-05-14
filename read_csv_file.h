@@ -10,4 +10,4 @@ double parseNumData(std::string& s);
 
 std::string parseStrData(std::string& s);
 
-void readCSVFile(ikeaData& warehouse, std::string fn);
+void readCSVFile(ikeaData& warehouse, ikeaData& shipmentData, std::string fn);

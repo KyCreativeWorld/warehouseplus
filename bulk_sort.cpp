@@ -11,6 +11,7 @@ void bulkSort(ikeaData& wh, std::string sortBy, size_t stopNum) {
         if (sortBy == "name") return (wh.name.at(a) < wh.name.at(b));
         if (sortBy == "type") return (wh.type.at(a) < wh.type.at(b));
         if (sortBy == "price") return (wh.price.at(a) < wh.price.at(b));
+        return (wh.id.at(a) < wh.id.at(b));
     });
 
     // Update wh based on indices
