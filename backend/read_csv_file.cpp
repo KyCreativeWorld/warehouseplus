@@ -37,41 +37,36 @@ std::string parseStrData(std::string& s) {
     return "error";
 }
 
-bool addData(ikeaData& warehouse, std::string dataLine) {
-    warehouse.id.push_back(parseNumData(dataLine));
-    if (warehouse.id.at(warehouse.id.size() - 1) == -1) {
-        warehouse.id.pop_back();
+bool addData(std::vector<ikeaData>& warehouse, std::string dataLine) {
+    ikeaData tempD;
+    
+    tempD.id = parseNumData(dataLine);
+    if (tempD.id == -1) {
         return false;
     }
     
-    warehouse.name.push_back(parseStrData(dataLine));
-    if (warehouse.name.at(warehouse.name.size() - 1) == "error") {
-        warehouse.id.pop_back();
-        warehouse.name.pop_back();
+    tempD.name = parseStrData(dataLine);
+    if (tempD.name == "error") {
         return false;
     }
 
-    warehouse.type.push_back(parseStrData(dataLine));
-    if (warehouse.type.at(warehouse.type.size() - 1) == "error") {
-        warehouse.id.pop_back();
-        warehouse.name.pop_back();
-        warehouse.type.pop_back();
+    tempD.type = parseStrData(dataLine);
+    if (tempD.type == "error") {
         return false;
     }
 
-    warehouse.price.push_back(parseNumData(dataLine));
-    if (warehouse.price.at(warehouse.price.size() - 1) <= -0.9 
-    && warehouse.price.at(warehouse.price.size() - 1) >= -1.1) {
-        warehouse.id.pop_back();
-        warehouse.name.pop_back();
-        warehouse.type.pop_back();
-        warehouse.price.pop_back();
+    tempD.price = parseNumData(dataLine);
+    if (tempD.price <= -0.9 && tempD.price >= -1.1) {
         return false;
     }
+
+    warehouse.push_back(tempD);
     return true;
 }
 
-void readCSVFile(ikeaData& warehouse, ikeaData& shipmentData, std::string fn) {
+
+
+void readCSVFile(std::vector<ikeaData>& warehouse, std::vector<ikeaData>& shipmentData, std::string fn) {
     std::ifstream dataFile(fn);
 
     // Getting the header separately
