@@ -5,12 +5,12 @@
 #include "backend/nlohmann/json.hpp"
 #include "backend/ikea_data_struct.h"
 #include "backend/inbound_sort.h"
-#include "backend/read_csv_file.h"
+#include "backend/read_csv_file.cpp"
 
 using json = nlohmann::json;
 
 int main() {
-    std::ifstream dataFile("config.txt");
+    std::ifstream dataFile("backend/config.json");
 
     json configData;
     try {
@@ -29,7 +29,11 @@ int main() {
 
     std::vector<ikeaData> warehouse;
     std::vector<ikeaData> shipmentData;
-    readCSVFile(warehouse, shipmentData, configData["data_file"]);
+
+    std::string whFileName = configData["data_file"];
+    whFileName.erase(remove(whFileName.begin(), whFileName.end(), '\"'), whFileName.end());
+    std::cout << "data_file: " << whFileName << std::endl;
+    readCSVFile(warehouse, shipmentData, whFileName);
 
     // inboundSort(warehouse, "price");
 
