@@ -35,7 +35,22 @@ void outboundShippment(std::vector<ikeaData>& wh, int amount) {}
 
 void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,
               int minInbFeq, int maxInbFeq, int minOutbFeq, int maxOutbFeq) {
-
+    // while (running)
+    // pull from simulator_info.json
+    // if (delete(new_data_available)) (check main.cpp for example of this)
+    // switch
+    //  case 0
+    //      simOn = false
+    //  case 1
+    //      simOn = true
+    //
+    //  if (simOn)
+    //    wait random time based on timer
+    //    call inb
+    //    call outb
+    //  else
+    //    wait 0.25s
+    // repeat
 
             
 }
