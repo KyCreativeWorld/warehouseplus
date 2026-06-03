@@ -1,3 +1,5 @@
 *.exe
 *.bin
 *.macbin
+new_data_available.txt
+delete_items.txt

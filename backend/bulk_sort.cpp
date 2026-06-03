@@ -10,7 +10,7 @@ void bulkSort(std::vector<ikeaData>& wh, std::string sortBy, size_t stopNum) {
         if (sortBy == "id") {
             // wh.sortedBy = 0;
 
-            std::sort(indices.begin(), indices.end(),
+            std::sort(wh.begin(), wh.end(),
                 [&](size_t a, size_t b) {
                     return wh[a].id < wh[b].id;
                 });
@@ -18,7 +18,7 @@ void bulkSort(std::vector<ikeaData>& wh, std::string sortBy, size_t stopNum) {
         else if (sortBy == "name") {
             // wh.sortedBy = 1;
 
-            std::sort(indices.begin(), indices.end(),
+            std::sort(wh.begin(), wh.end(),
                 [&](size_t a, size_t b) {
                     return wh[a].name < wh[b].name;
                 });
@@ -26,7 +26,7 @@ void bulkSort(std::vector<ikeaData>& wh, std::string sortBy, size_t stopNum) {
         else if (sortBy == "type") {
             // wh.sortedBy = 2;
 
-            std::sort(indices.begin(), indices.end(),
+            std::sort(wh.begin(), wh.end(),
                 [&](size_t a, size_t b) {
                     return wh[a].type < wh[b].type;
                 });
@@ -34,7 +34,7 @@ void bulkSort(std::vector<ikeaData>& wh, std::string sortBy, size_t stopNum) {
         else if (sortBy == "price") {
             // wh.sortedBy = 3;
 
-            std::sort(indices.begin(), indices.end(),
+            std::sort(wh.begin(), wh.end(),
                 [&](size_t a, size_t b) {
                     return wh[a].price < wh[b].price;
                 });

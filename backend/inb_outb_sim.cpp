@@ -1,20 +1,6 @@
 #include "inb_outb_sim.h"
 #include <random>
 
-class RandomGenerator {
-    private:
-        std::mt19937 rng;
-
-    public:
-        RandomGenerator() : rng(std::random_device{}()) {}
-
-        size_t randomIndex(size_t maxExclusive) {
-            std::uniform_int_distribution<size_t> dist(0, maxExclusive - 1);
-
-            return dist(rng);
-        }
-};
-
 
 void inboundShippment(std::vector<ikeaData>& wh,
                       std::vector<ikeaData>& shipments,
@@ -33,8 +19,8 @@ void inboundShippment(std::vector<ikeaData>& wh,
 
 void outboundShippment(std::vector<ikeaData>& wh, int amount) {}
 
-void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,
-              int minInbFeq, int maxInbFeq, int minOutbFeq, int maxOutbFeq) {
+// void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,
+//               int minInbFeq, int maxInbFeq, int minOutbFeq, int maxOutbFeq) {
     // while (running)
     // pull from simulator_info.json
     // if (delete(new_data_available)) (check main.cpp for example of this)
@@ -53,4 +39,18 @@ void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, in
     // repeat
 
             
+// }
+
+void startDeleteLoop(std::vector<ikeaData>& wh, unsigned int amount) {
+    bool delLoopRunning = true;
+    
+    while (delLoopRunning) {
+        if (std::filesystem::remove("backend/delete_items.txt")) {
+            for (unsigned int i = 0; i < amount; i++) {
+                wh.erase(wh.end() - amount, wh.end());
+            }
+        }
+        
+        if (!std::filesystem::exists("backend/simulator_info.json")) delLoopRunning = false;
+    }
 }
