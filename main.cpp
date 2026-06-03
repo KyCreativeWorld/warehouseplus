@@ -27,10 +27,6 @@ int main() {
 
     dataFile.close();
 
-    // std::string dataFileName;
-
-    // getline(std::cin, dataFileName);
-
     std::vector<ikeaData> warehouse;
     std::vector<ikeaData> shipmentData;
 
@@ -38,8 +34,6 @@ int main() {
     whFileName.erase(remove(whFileName.begin(), whFileName.end(), '\"'), whFileName.end());
     std::cout << "data_file: " << whFileName << std::endl;
     readCSVFile(warehouse, shipmentData, whFileName);
-
-    // inboundSort(warehouse, "price");
 
     unsigned int printStop = 10;
     std::cout << std::endl << "ShipmentData (size: " << shipmentData.size() << "):" << std::endl;
@@ -71,6 +65,7 @@ int main() {
 
     bool programRunning = true;
     std::ofstream warehouseInfoFile("../warehouseplus_gui/warehouse_info.json");
+    std::ofstream newDataAvailableNotificationFile("../warehouseplus_gui/new_data_available.txt");
 
     while (programRunning) {
         
@@ -81,8 +76,9 @@ int main() {
         }
        
         simInfoFile.close();
+        newDataAvailableNotificationFile.close();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
         if (!std::filesystem::exists("backend/simulator_info.json")) programRunning = false;
     }
 
