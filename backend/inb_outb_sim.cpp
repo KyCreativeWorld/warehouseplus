@@ -26,6 +26,8 @@ void inboundShippment(std::vector<ikeaData>& wh,
         size_t randItemIndex = randGen.randomIndex(shipments.size());
 
         wh.push_back(shipments[randItemIndex]);
+
+        numInboundShippments++;
     }
 }
 
