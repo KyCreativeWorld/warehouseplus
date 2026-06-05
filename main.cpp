@@ -98,6 +98,8 @@ int main() {
         saleResult = putItemsOnSale(warehouse, 10);
         
 
+        if (timer > 0) timer--;
+        
         std::ofstream newDataAvailableNotificationFile("../warehouseplus_gui/new_data_available.txt");
         std::ofstream warehouseInfoFile("../warehouseplus_gui/warehouse_info.json");
         
