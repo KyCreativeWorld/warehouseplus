@@ -4,7 +4,7 @@
 #include <vector>
 #include <filesystem>
 
-void inboundShippment(std::vector<ikeaData>& wh,
+void inboundShipment(std::vector<ikeaData>& wh,
                       std::vector<ikeaData>& shipments,
                       int amount,
                       RandomGenerator& randGen) 
@@ -18,7 +18,7 @@ void inboundShippment(std::vector<ikeaData>& wh,
     }
 }
 
-void outboundShippment(std::vector<ikeaData>& wh,
+void outboundShipment(std::vector<ikeaData>& wh,
                        std::vector<ikeaData>& shipments,
                        int amount,
                        RandomGenerator& randGen)
@@ -79,4 +79,13 @@ void deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
             wh.erase(wh.end() - amount, wh.end());
         }
     }
+}
+
+
+
+unsigned int runShipments(std::vector<ikeaData>& wh, json simData, RandomGenerator& randGen) {
+    int inbAmount = simData["sim_inbound_min"].get<int>() + randGen.randomIndex(simData["sim_inbound_max"].get<int>() - simData["sim_inbound_min"].get<int>() + 1);
+    int outbAmount = simData["sim_outbound_min"].get<int>() + randGen.randomIndex(simData["sim_outbound_max"].get<int>() - simData["sim_outbound_min"].get<int>() + 1);
+
+    
 }

@@ -23,7 +23,7 @@ int main() {
     std::string whFileName = "IKEA_warehouse_data.csv";
     try {
         dataFile >> configData;
-        whFileName = configData["data_file"];
+        whFileName = configData["data_file"].get<std::string>();
     } catch (const json::parse_error& e) {
         std::cout << "JSON Parsing Error: " << e.what() << std::endl;
         return 1;
@@ -68,6 +68,10 @@ int main() {
 
     bool programRunning = true;
 
+    unsigned int timer = 0;
+
+    json simInfo;
+
     while (programRunning) {
         deleteItemsUpdate(warehouse, 10);
 
@@ -84,6 +88,22 @@ int main() {
        
         warehouseInfoFile.close();
         newDataAvailableNotificationFile.close();
+
+
+
+        if (std::filesystem::exists("backend/simulator_info.json")) {
+            try {
+                std::ifstream simInfoFile("backend/simulator_info.json");
+                
+                simInfo << simInfoFile;
+            } catch (const json::parse_error& e) {
+                std::cout << "JSON Parsing Error for simInfoFile: " << e.what() << std::endl;
+            }
+
+            if (simInfo["sim_active"].get<bool>() && timer == (unsigned int)0) {
+                
+            }
+        }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         if (!std::filesystem::exists("backend/is_running.txt")) programRunning = false;
