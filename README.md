@@ -10,9 +10,8 @@ During the development of this project, AI chatbots were used as a tutor/bug-tes
 
 ## Benchmarking
 
-``` cpp
-    n         | Create/Read | Update | Delete | Bulk Sort | Time is in ms
-    1,000     |
-    10,000    |
-    100,000   |
-```
+| n | Create/Read | Update | Delete | Bulk Sort |
+|---|---|---|---|---|
+| 1,000 | | | | |
+| 10,000 | | | | |
+| 100,000 | | | | |
