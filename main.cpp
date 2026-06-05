@@ -37,7 +37,7 @@ int main() {
     std::cout << "data_file: " << whFileName << std::endl;
 
     //Choose n for runtime, used for timing code
-    size_t n = 1000;
+    size_t n = 500000;
 
     auto clockStart = std::chrono::high_resolution_clock::now();                        //TIMER IS HERE
 // Code you want to measure
