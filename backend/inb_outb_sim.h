@@ -32,8 +32,8 @@ void outboundShipment(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipment
 
 unsigned int runShipments(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, json simData, RandomGenerator& randGen);
 
-inline unsigned int numInboundShipments;
-inline unsigned int numOutboundShipments;
+inline unsigned int numInboundShippments;
+inline unsigned int numOutboundShippments;
 
 int deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount);
 

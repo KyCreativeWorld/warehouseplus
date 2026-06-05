@@ -15,7 +15,7 @@ void inboundShipment(std::vector<ikeaData>& wh,
 
         binaryInsert(wh, shipments[randItemIndex]);  
         
-        numInboundShipments++;
+        numInboundShippments++;
     }
 }
 
@@ -30,7 +30,7 @@ void outboundShipment(std::vector<ikeaData>& wh,
         shipments.push_back(wh[randItemIndex]);
         wh.erase(wh.begin() + randItemIndex);
 
-        numOutboundShipments++;
+        numOutboundShippments++;
     }
 }
 
