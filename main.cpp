@@ -11,6 +11,7 @@
 #include "backend/inbound_sort.h"
 #include "backend/read_csv_file.h"
 #include "backend/inb_outb_sim.h"
+#include "backend/bulk_sort.h"
 
 using json = nlohmann::json;
 
@@ -37,6 +38,8 @@ int main() {
     whFileName.erase(remove(whFileName.begin(), whFileName.end(), '\"'), whFileName.end());
     std::cout << "data_file: " << whFileName << std::endl;
     readCSVFile(warehouse, shipmentData, whFileName);
+
+    bulkSort(warehouse);
 
     unsigned int printStop = 10;
     std::cout << std::endl << "ShipmentData (size: " << shipmentData.size() << "):" << std::endl;
@@ -65,6 +68,8 @@ int main() {
     }
 
 
+
+    RandomGenerator randGen;
 
     bool programRunning = true;
 
@@ -101,7 +106,7 @@ int main() {
             }
 
             if (simInfo["sim_active"].get<bool>() && timer == (unsigned int)0) {
-                
+                timer = 10 * runShipments(warehouse, shipmentData, simInfo, randGen);
             }
         }
 

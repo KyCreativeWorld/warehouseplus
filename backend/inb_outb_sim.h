@@ -30,7 +30,7 @@ void binaryInsert(std::vector<ikeaData>& wh, const ikeaData& value);
 void inboundShipment(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, int amount, RandomGenerator& randGen);
 void outboundShipment(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, int amount, RandomGenerator& randGen);
 
-unsigned int runShipments(std::vector<ikeaData>& wh, json simData);
+unsigned int runShipments(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, json simData, RandomGenerator& randGen);
 
 inline unsigned int numInboundShippments;
 inline unsigned int numOutboundShippments;

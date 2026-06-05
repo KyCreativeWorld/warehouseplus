@@ -76,9 +76,12 @@ void deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
 
 
 
-unsigned int runShipments(std::vector<ikeaData>& wh, json simData, RandomGenerator& randGen) {
+unsigned int runShipments(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, json simData, RandomGenerator& randGen) {
     int inbAmount = simData["sim_inbound_min"].get<int>() + randGen.randomIndex(simData["sim_inbound_max"].get<int>() - simData["sim_inbound_min"].get<int>() + 1);
     int outbAmount = simData["sim_outbound_min"].get<int>() + randGen.randomIndex(simData["sim_outbound_max"].get<int>() - simData["sim_outbound_min"].get<int>() + 1);
 
-    
+    inboundShipment(wh, shipments, inbAmount, randGen);
+    outboundShipment(wh, shipments, outbAmount, randGen);
+
+    return simData["sim_timer_min"].get<int>() + randGen.randomIndex(simData["sim_timer_max"].get<int>() - simData["sim_timer_min"].get<int>() + 1);
 }

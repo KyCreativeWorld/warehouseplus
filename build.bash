@@ -16,7 +16,7 @@ echo "========================================="
 # Explicitly list your files so there are no surprises with relative paths
 g++ -std=c++17 \
     main.cpp \
-    backend/inb_outb_sim.cpp \
+    backend/*.cpp \
     -Wall -Wextra \
     -o $APP_NAME
 
