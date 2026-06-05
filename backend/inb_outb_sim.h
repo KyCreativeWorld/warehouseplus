@@ -24,7 +24,7 @@ void outboundShippment(std::vector<ikeaData>& wh, int amount);
 // void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,
             //   int minInbFeq, int maxInbFeq, int minOutbFeq, int maxOutbFeq);
 
-unsigned int numInboundShippments;
-unsigned int numOutboundShippments;
+inline unsigned int numInboundShippments;
+inline unsigned int numOutboundShippments;
 
 void startDeleteLoop(std::vector<ikeaData>& wh, unsigned int amount);

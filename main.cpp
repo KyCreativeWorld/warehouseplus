@@ -9,7 +9,7 @@
 #include "backend/nlohmann/json.hpp"
 #include "backend/ikea_data_struct.h"
 #include "backend/inbound_sort.h"
-#include "backend/read_csv_file.cpp"
+#include "backend/read_csv_file.h"
 #include "backend/inb_outb_sim.h"
 
 using json = nlohmann::json;
@@ -77,14 +77,16 @@ int main() {
         if (!warehouseInfoFile.is_open()) {
             std::cerr << "[ERROR] Could not write to file!" << std::endl;
         } else {
-            warehouseInfoFile << "{\"warehouse_size\": " << warehouse.size() << "}";
+            warehouseInfoFile << "{\"warehouse_size\": " << warehouse.size()
+                              << ",\"inb_shipments\":" << numInboundShippments
+                              << ",\"outb_shipments\":" << numOutboundShippments << "}";
         }
        
         warehouseInfoFile.close();
         newDataAvailableNotificationFile.close();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
-        if (!std::filesystem::exists("backend/simulator_info.json")) programRunning = false;
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        if (!std::filesystem::exists("backend/is_running.txt")) programRunning = false;
     }
 
     try {
