@@ -60,7 +60,7 @@ int deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
 int putItemsOnSale(std::vector<ikeaData>& wh, unsigned int amount) {
     if (std::filesystem::remove("backend/put_items_on_sale.txt")) {
         for (unsigned int i = 0; i < amount; i++) {
-            wh.at(i).price = wh.at(i).price / 2;
+            wh.at(i).price = wh.at(i).price * 2;
         }
 
         return 1;
