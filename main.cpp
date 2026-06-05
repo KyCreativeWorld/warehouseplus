@@ -136,8 +136,14 @@ int main() {
             warehouseInfoFile << "{\"warehouse_size\": " << warehouse.size()
                               << ",\"inb_shipments\":" << numInboundShippments
                               << ",\"outb_shipments\":" << numOutboundShippments
-                              << ",\"first_item_price\":" << warehouse.at(0).price << "}";
+                              << ",\"first_item_id\":" << warehouse.at(0).id
+                              << ",\"first_item_name\":\"" << warehouse.at(0).name
+                              << "\",\"first_item_type\":\"" << warehouse.at(0).type
+                              << "\",\"first_item_price\":" << warehouse.at(0).price << "}";
         }
+
+        std::cout << "<><><> inbound: " << numInboundShippments << std::endl
+                  << "<><><> outbound: " << numOutboundShippments << std::endl;
        
         warehouseInfoFile.close();
         newDataAvailableNotificationFile.close();
