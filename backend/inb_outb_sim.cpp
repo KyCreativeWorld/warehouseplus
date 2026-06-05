@@ -1,14 +1,28 @@
 #include "inb_outb_sim.h"
 #include <random>
-
+#include <vector>
+#include <filesystem>
 
 void inboundShippment(std::vector<ikeaData>& wh,
                       std::vector<ikeaData>& shipments,
                       int amount,
                       RandomGenerator& randGen) 
 {
-    for (int i = 0; i < amount; ++i) {
+    for (int i = 0; i < amount; ++i) {        
+        size_t randItemIndex = randGen.randomIndex(shipments.size());
+
         
+
+        
+    }
+}
+
+void outboundShippment(std::vector<ikeaData>& wh,
+                       std::vector<ikeaData>& shipments,
+                       int amount,
+                       RandomGenerator& randGen)
+{
+    for (int i=0; i < amount; ++i) {
         size_t randItemIndex = randGen.randomIndex(shipments.size());
 
         wh.push_back(shipments[randItemIndex]);
@@ -17,7 +31,24 @@ void inboundShippment(std::vector<ikeaData>& wh,
     }
 }
 
-void outboundShippment(std::vector<ikeaData>& wh, int amount) {}
+void binaryInsert(std::vector<ikeaData>& wh, ikeaData) {
+    int low = 0;
+    int high = static_cast<int>(wh.size()-1);
+    int mid = low + (high - low) / 2;
+    int indexToInsert = -1;
+
+    while (low <= high)
+    {
+        if (mid < 0 || mid > wh.size()-1)
+            break;
+        
+        if (value < wh[mid].id) {
+
+        }
+    }
+    
+
+}
 
 // void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,
 //               int minInbFeq, int maxInbFeq, int minOutbFeq, int maxOutbFeq) {

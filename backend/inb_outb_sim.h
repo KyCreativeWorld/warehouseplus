@@ -3,6 +3,7 @@
 #include "ikea_data_struct.h"
 #include <random>
 #include <vector>
+#include <filesystem>
 
 class RandomGenerator {
     private:
@@ -18,8 +19,10 @@ class RandomGenerator {
         }
 };
 
+void binaryInsert(std::vector<ikeaData>& wh, ikeaData);
+
 void inboundShippment(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, int amount, RandomGenerator& randGen);
-void outboundShippment(std::vector<ikeaData>& wh, int amount);
+void outboundShippment(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, int amount, RandomGenerator& randGen);
 
 // void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,
             //   int minInbFeq, int maxInbFeq, int minOutbFeq, int maxOutbFeq);
