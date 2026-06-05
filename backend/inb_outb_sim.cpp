@@ -47,6 +47,8 @@ void binaryInsert(std::vector<ikeaData>& wh, const ikeaData& value) {
 int deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
     if (std::filesystem::remove("backend/delete_items.txt")) {
         wh.erase(wh.end() - amount, wh.end());
+
+        return 1;
     } else {
         return -1;
     }
@@ -57,6 +59,8 @@ int putItemsOnSale(std::vector<ikeaData>& wh, unsigned int amount) {
         for (unsigned int i = 0; i < amount; i++) {
             wh.at(i).price = wh.at(i).price / 2;
         }
+
+        return 1;
     } else {
         return -1;
     }

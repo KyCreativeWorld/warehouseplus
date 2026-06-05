@@ -90,17 +90,13 @@ int main() {
 
     json simInfo;
 
-    int createTime;
-    int readTime;
-    int updateTime;
-    int deleteTime;
-
-    int tempTimer;
+    int delResult;
+    int saleResult;
     while (programRunning) {
-        tempTimer = deleteItemsUpdate(warehouse, 10);
-        if (tempTimer != -1) deleteTime = tempTimer;
-        tempTimer = putItemsOnSale(warehouse, 10);
-        if (tempTimer != -1) updateTime = tempTimer;
+        delResult = deleteItemsUpdate(warehouse, 10);
+        
+        saleResult = putItemsOnSale(warehouse, 10);
+        
 
         std::ofstream newDataAvailableNotificationFile("../warehouseplus_gui/new_data_available.txt");
         std::ofstream warehouseInfoFile("../warehouseplus_gui/warehouse_info.json");
