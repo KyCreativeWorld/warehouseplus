@@ -13,7 +13,9 @@ void inboundShipment(std::vector<ikeaData>& wh,
     for (int i = 0; i < amount; ++i) {        
         size_t randItemIndex = randGen.randomIndex(shipments.size());
 
-        binaryInsert(wh, shipments[randItemIndex]);        
+        binaryInsert(wh, shipments[randItemIndex]);  
+        
+        numInboundShipments++;
     }
 }
 
@@ -23,11 +25,12 @@ void outboundShipment(std::vector<ikeaData>& wh,
                        RandomGenerator& randGen)
 {
     for (int i=0; i < amount; ++i) {
-        size_t randItemIndex = randGen.randomIndex(shipments.size());
+        size_t randItemIndex = randGen.randomIndex(wh.size());
 
-        wh.push_back(shipments[randItemIndex]);
+        shipments.push_back(wh[randItemIndex]);
+        wh.erase(wh.begin() + randItemIndex);
 
-        numInboundShippments++;
+        numOutboundShipments++;
     }
 }
 
