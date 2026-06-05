@@ -66,7 +66,7 @@ bool addData(std::vector<ikeaData>& warehouse, std::string dataLine) {
 
 
 
-void readCSVFile(std::vector<ikeaData>& warehouse, std::vector<ikeaData>& shipmentData, std::string fn) {
+void readCSVFile(std::vector<ikeaData>& warehouse, std::vector<ikeaData>& shipmentData, std::string fn, size_t STOPNUM = 500000) {
     std::ifstream dataFile(fn);
 
     // Getting the header separately
@@ -74,7 +74,6 @@ void readCSVFile(std::vector<ikeaData>& warehouse, std::vector<ikeaData>& shipme
     std::getline(dataFile, dataHeader);
 
     size_t dataLength = 0;
-    size_t STOPNUM = 500000;
 
     bool addDataSuccess;
     std::string dataLine;
