@@ -39,20 +39,25 @@ int main() {
     //Choose n for runtime, used for timing code
     size_t n = 1000;
 
-    readCSVFile(warehouse, shipmentData, whFileName, n);
-
-    auto clockStart = std::chrono::high_resolution_clock::now();
-
+    auto clockStart = std::chrono::high_resolution_clock::now();                        //TIMER IS HERE
 // Code you want to measure
-    bulkSort(warehouse);
-
+    readCSVFile(warehouse, shipmentData, whFileName, n);                    
     auto clockEnd = std::chrono::high_resolution_clock::now();
-
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
         clockEnd - clockStart
     );
+    std::cout << "Read at n = " << n << ": " << duration.count() << " milliseconds\n";
 
+
+    auto clockStart = std::chrono::high_resolution_clock::now();                        //TIMER IS HERE
+// Code you want to measure
+    bulkSort(warehouse);
+    auto clockEnd = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+        clockEnd - clockStart
+    );
     std::cout << "Bulksort at n = " << n << ": " << duration.count() << " milliseconds\n";
+
 
     unsigned int printStop = 100;
     std::cout << std::endl << "ShipmentData (size: " << shipmentData.size() << "):" << std::endl;
@@ -93,9 +98,31 @@ int main() {
     int delResult;
     int saleResult;
     while (programRunning) {
+
+        auto clockStart = std::chrono::high_resolution_clock::now();                    //TIMER IS HERE
+    // Code you want to measure
         delResult = deleteItemsUpdate(warehouse, 10);
+        auto clockEnd = std::chrono::high_resolution_clock::now();
+
+        if (delResult != -1) {
+            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+                clockEnd - clockStart
+            );
+            std::cout << "Delete at n = " << n << ": " << duration.count() << " milliseconds\n";
+        }        
         
+        auto clockStart = std::chrono::high_resolution_clock::now();                    //TIMER IS HERE
+    // Code you want to measure
         saleResult = putItemsOnSale(warehouse, 10);
+        auto clockEnd = std::chrono::high_resolution_clock::now();
+
+        if (saleResult != -1) {
+            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+                clockEnd - clockStart
+            );
+            std::cout << "Update at n = " << n << ": " << duration.count() << " milliseconds\n";
+        }
+        
         
 
         if (timer > 0) timer--;
