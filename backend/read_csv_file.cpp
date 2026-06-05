@@ -21,7 +21,7 @@ double parseNumData(std::string& s) {
 
 std::string parseStrData(std::string& s) {
     try {
-        short fIndex = s.find(',');
+        unsigned int fIndex = s.find(',');
         if (s.find("\"") == 0) { fIndex = s.find('\"', 1) + 1; }
         std::string s2 = s.substr(0, fIndex);
         if (s.size() > fIndex + 1) {
@@ -73,7 +73,7 @@ void readCSVFile(std::vector<ikeaData>& warehouse, std::vector<ikeaData>& shipme
     std::string dataHeader;
     std::getline(dataFile, dataHeader);
 
-    int dataLength = 0;
+    size_t dataLength = 0;
     size_t STOPNUM = 500000;
 
     bool addDataSuccess;

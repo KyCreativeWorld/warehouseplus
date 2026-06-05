@@ -9,7 +9,7 @@
 #include "backend/nlohmann/json.hpp"
 #include "backend/ikea_data_struct.h"
 #include "backend/inbound_sort.h"
-#include "backend/read_csv_file.cpp"
+#include "backend/read_csv_file.h"
 #include "backend/inb_outb_sim.h"
 
 using json = nlohmann::json;
@@ -20,8 +20,10 @@ int main() {
     std::ifstream dataFile("backend/config.json");
 
     json configData;
+    std::string whFileName = "IKEA_warehouse_data.csv";
     try {
         dataFile >> configData;
+        whFileName = configData["data_file"];
     } catch (const json::parse_error& e) {
         std::cout << "JSON Parsing Error: " << e.what() << std::endl;
         return 1;
@@ -32,44 +34,42 @@ int main() {
     std::vector<ikeaData> warehouse;
     std::vector<ikeaData> shipmentData;
 
-    std::string whFileName = configData["data_file"];
     whFileName.erase(remove(whFileName.begin(), whFileName.end(), '\"'), whFileName.end());
     std::cout << "data_file: " << whFileName << std::endl;
     readCSVFile(warehouse, shipmentData, whFileName);
 
-    // unsigned int printStop = 10;
-    // std::cout << std::endl << "ShipmentData (size: " << shipmentData.size() << "):" << std::endl;
-    // if (shipmentData.size() < 1) { std::cout << "NO ITEMS IN SHIPMENTDATA!!" << std::endl; }
-    // else {
-    // for (unsigned int i = 0; i < printStop; ++i) {
-    //     std::cout << shipmentData.at(i).id << ",{"
-    //           << shipmentData.at(i).name << "},["
-    //           << shipmentData.at(i).type << "],"
-    //           << shipmentData.at(i).price << " >"
-    //           << std::endl;
-    // }
-    // }
+    unsigned int printStop = 10;
+    std::cout << std::endl << "ShipmentData (size: " << shipmentData.size() << "):" << std::endl;
+    if (shipmentData.size() < 1) { std::cout << "NO ITEMS IN SHIPMENTDATA!!" << std::endl; }
+    else {
+    for (unsigned int i = 0; i < printStop; ++i) {
+        std::cout << shipmentData.at(i).id << ",{"
+              << shipmentData.at(i).name << "},["
+              << shipmentData.at(i).type << "],"
+              << shipmentData.at(i).price << " >"
+              << std::endl;
+    }
+    }
 
 
-    // std::cout << std::endl << "Warehouse (size: " << warehouse.size() << "):" << std::endl;
-    // if (warehouse.size() < 1) { std::cout << "NO ITEMS IN WAREHOUSE!!" << std::endl; }
-    // else {
-    // for (unsigned int i = 0; i < printStop; ++i) {
-    //     std::cout << warehouse.at(i).id << ",{"
-    //           << warehouse.at(i).name << "},["
-    //           << warehouse.at(i).type << "],"
-    //           << warehouse.at(i).price << " >"
-    //           << std::endl;
-    // }
-    // }
+    std::cout << std::endl << "Warehouse (size: " << warehouse.size() << "):" << std::endl;
+    if (warehouse.size() < 1) { std::cout << "NO ITEMS IN WAREHOUSE!!" << std::endl; }
+    else {
+    for (unsigned int i = 0; i < printStop; ++i) {
+        std::cout << warehouse.at(i).id << ",{"
+              << warehouse.at(i).name << "},["
+              << warehouse.at(i).type << "],"
+              << warehouse.at(i).price << " >"
+              << std::endl;
+    }
+    }
 
 
 
     bool programRunning = true;
 
-    startDeleteLoop(warehouse, 10);
-
     while (programRunning) {
+        deleteItemsUpdate(warehouse, 10);
 
         std::ofstream newDataAvailableNotificationFile("../warehouseplus_gui/new_data_available.txt");
         std::ofstream warehouseInfoFile("../warehouseplus_gui/warehouse_info.json");
@@ -77,14 +77,16 @@ int main() {
         if (!warehouseInfoFile.is_open()) {
             std::cerr << "[ERROR] Could not write to file!" << std::endl;
         } else {
-            warehouseInfoFile << "{\"warehouse_size\": " << warehouse.size() << "}";
+            warehouseInfoFile << "{\"warehouse_size\": " << warehouse.size()
+                              << ",\"inb_shipments\":" << numInboundShippments
+                              << ",\"outb_shipments\":" << numOutboundShippments << "}";
         }
        
         warehouseInfoFile.close();
         newDataAvailableNotificationFile.close();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
-        if (!std::filesystem::exists("backend/simulator_info.json")) programRunning = false;
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        if (!std::filesystem::exists("backend/is_running.txt")) programRunning = false;
     }
 
     try {
