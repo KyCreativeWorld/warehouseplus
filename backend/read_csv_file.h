@@ -10,4 +10,4 @@ double parseNumData(std::string& s);
 
 std::string parseStrData(std::string& s);
 
-void readCSVFile(std::vector<ikeaData>& warehouse, std::vector<ikeaData>& shipmentData, std::string fn);
+void readCSVFile(std::vector<ikeaData>& warehouse, std::vector<ikeaData>& shipmentData, std::string fn, size_t STOPNUM);

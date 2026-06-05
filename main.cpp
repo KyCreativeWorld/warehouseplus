@@ -15,7 +15,6 @@
 using json = nlohmann::json;
 
 int main() {
-    // auto clockStart = std::chrono::high_resolution_clock::now();
 
     std::ifstream dataFile("backend/config.json");
 
@@ -36,9 +35,24 @@ int main() {
 
     whFileName.erase(remove(whFileName.begin(), whFileName.end(), '\"'), whFileName.end());
     std::cout << "data_file: " << whFileName << std::endl;
-    readCSVFile(warehouse, shipmentData, whFileName);
 
+    //Choose n for runtime, used for timing code
+    size_t n = 1000;
+
+    readCSVFile(warehouse, shipmentData, whFileName, n);
+
+    auto clockStart = std::chrono::high_resolution_clock::now();
+
+// Code you want to measure
     bulkSort(warehouse);
+
+    auto clockEnd = std::chrono::high_resolution_clock::now();
+
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+        clockEnd - clockStart
+    );
+
+    std::cout << "Bulksort at n = " << n << ": " << duration.count() << " milliseconds\n";
 
     unsigned int printStop = 100;
     std::cout << std::endl << "ShipmentData (size: " << shipmentData.size() << "):" << std::endl;
