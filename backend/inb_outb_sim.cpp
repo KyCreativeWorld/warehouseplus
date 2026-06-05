@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <random>
 #include <vector>
+#include <algorithm>
 #include <filesystem>
 
 void inboundShipment(std::vector<ikeaData>& wh,
@@ -12,9 +13,7 @@ void inboundShipment(std::vector<ikeaData>& wh,
     for (int i = 0; i < amount; ++i) {        
         size_t randItemIndex = randGen.randomIndex(shipments.size());
 
-        
-
-        
+        binaryInsert(wh, shipments[randItemIndex]);        
     }
 }
 
@@ -32,23 +31,17 @@ void outboundShipment(std::vector<ikeaData>& wh,
     }
 }
 
-void binaryInsert(std::vector<ikeaData>& wh, ikeaData) {
-    int low = 0;
-    int high = static_cast<int>(wh.size()-1);
-    int mid = low + (high - low) / 2;
-    int indexToInsert = -1;
-
-    while (low <= high)
-    {
-        if (mid < 0 || mid > wh.size()-1)
-            break;
-        
-        if (value < wh[mid].id) {
-
+void binaryInsert(std::vector<ikeaData>& wh, const ikeaData& value) {
+    auto pos = std::lower_bound(
+        wh.begin(),
+        wh.end(),
+        value.id,
+        [](const ikeaData& item, int id) {
+            return item.id < id;
         }
-    }
+    );
     
-
+    wh.insert(pos, value);
 }
 
 // void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,

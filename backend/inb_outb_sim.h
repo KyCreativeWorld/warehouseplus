@@ -3,6 +3,7 @@
 #include "ikea_data_struct.h"
 #include <random>
 #include <vector>
+#include <algorithm>
 #include <filesystem>
 #include "nlohmann/json.hpp"
 
@@ -24,7 +25,7 @@ class RandomGenerator {
         }
 };
 
-void binaryInsert(std::vector<ikeaData>& wh, ikeaData);
+void binaryInsert(std::vector<ikeaData>& wh, const ikeaData& value);
 
 void inboundShipment(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, int amount, RandomGenerator& randGen);
 void outboundShipment(std::vector<ikeaData>& wh, std::vector<ikeaData>& shipments, int amount, RandomGenerator& randGen);
