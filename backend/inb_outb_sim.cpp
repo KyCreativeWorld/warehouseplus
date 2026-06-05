@@ -68,9 +68,7 @@ void binaryInsert(std::vector<ikeaData>& wh, const ikeaData& value) {
 
 void deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
     if (std::filesystem::remove("backend/delete_items.txt")) {
-        for (unsigned int i = 0; i < amount; i++) {
-            wh.erase(wh.end() - amount, wh.end());
-        }
+        wh.erase(wh.end() - amount, wh.end());
     }
 }
 

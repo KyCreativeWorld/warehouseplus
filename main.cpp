@@ -118,7 +118,13 @@ int main() {
         if (std::filesystem::remove("../warehouseplus_gui/warehouse_info.json")) {
             std::cout << "Cleanup successful: warehouse_info.json file deleted.\n";
         } else {
-            std::cout << "Cleanup note: File did not exist.\n";
+            std::cout << "Cleanup note: warehouse_info.json did not exist.\n";
+        }
+
+        if (std::filesystem::remove("../warehouseplus_gui/new_data_available.txt")) {
+            std::cout << "Cleanup successful: new_data_available.txt file deleted.\n";
+        } else {
+            std::cout << "Cleanup note: new_data_available.txt did not exist.\n";
         }
     } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "Cleanup Error: Could not delete file. " << e.what() << '\n';
