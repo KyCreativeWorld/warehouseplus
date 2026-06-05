@@ -35,4 +35,6 @@ unsigned int runShipments(std::vector<ikeaData>& wh, std::vector<ikeaData>& ship
 inline unsigned int numInboundShippments;
 inline unsigned int numOutboundShippments;
 
-void deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount);
+int deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount);
+
+int putItemsOnSale(std::vector<ikeaData>& wh, unsigned int amount);
