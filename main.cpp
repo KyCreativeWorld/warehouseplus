@@ -76,9 +76,17 @@ int main() {
 
     json simInfo;
 
+    int createTime;
+    int readTime;
+    int updateTime;
+    int deleteTime;
+
+    int tempTimer;
     while (programRunning) {
-        deleteItemsUpdate(warehouse, 10);
-        putItemsOnSale(warehouse, 10);
+        tempTimer = deleteItemsUpdate(warehouse, 10);
+        if (tempTimer != -1) deleteTime = tempTimer;
+        tempTimer = putItemsOnSale(warehouse, 10);
+        if (tempTimer != -1) updateTime = tempTimer;
 
         std::ofstream newDataAvailableNotificationFile("../warehouseplus_gui/new_data_available.txt");
         std::ofstream warehouseInfoFile("../warehouseplus_gui/warehouse_info.json");
@@ -88,7 +96,8 @@ int main() {
         } else {
             warehouseInfoFile << "{\"warehouse_size\": " << warehouse.size()
                               << ",\"inb_shipments\":" << numInboundShippments
-                              << ",\"outb_shipments\":" << numOutboundShippments << "}";
+                              << ",\"outb_shipments\":" << numOutboundShippments
+                              << ",\"first_item_price\":" << warehouse.at(0).price << "}";
         }
        
         warehouseInfoFile.close();
