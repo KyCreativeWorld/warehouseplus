@@ -44,31 +44,21 @@ void binaryInsert(std::vector<ikeaData>& wh, const ikeaData& value) {
     wh.insert(pos, value);
 }
 
-// void startSim(std::vector<ikeaData>& wh, int minInb, int maxInb, int minOutb, int maxOutb,
-//               int minInbFeq, int maxInbFeq, int minOutbFeq, int maxOutbFeq) {
-    // while (running)
-    // pull from simulator_info.json
-    // if (delete(new_data_available)) (check main.cpp for example of this)
-    // switch
-    //  case 0
-    //      simOn = false
-    //  case 1
-    //      simOn = true
-    //
-    //  if (simOn)
-    //    wait random time based on timer
-    //    call inb
-    //    call outb
-    //  else
-    //    wait 0.25s
-    // repeat
-
-            
-// }
-
-void deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
+int deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
     if (std::filesystem::remove("backend/delete_items.txt")) {
         wh.erase(wh.end() - amount, wh.end());
+    } else {
+        return -1;
+    }
+}
+
+int putItemsOnSale(std::vector<ikeaData>& wh, unsigned int amount) {
+    if (std::filesystem::remove("backend/put_items_on_sale.txt")) {
+        for (unsigned int i = 0; i < amount; i++) {
+            wh.at(i).price = wh.at(i).price / 2;
+        }
+    } else {
+        return -1;
     }
 }
 

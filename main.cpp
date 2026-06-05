@@ -92,6 +92,7 @@ int main() {
 
     while (programRunning) {
         deleteItemsUpdate(warehouse, 10);
+        putItemsOnSale(warehouse, 10);
 
         std::ofstream newDataAvailableNotificationFile("../warehouseplus_gui/new_data_available.txt");
         std::ofstream warehouseInfoFile("../warehouseplus_gui/warehouse_info.json");
