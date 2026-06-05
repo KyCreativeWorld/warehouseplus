@@ -42,16 +42,10 @@ void outboundShippment(std::vector<ikeaData>& wh, int amount) {}
             
 // }
 
-void startDeleteLoop(std::vector<ikeaData>& wh, unsigned int amount) {
-    bool delLoopRunning = true;
-    
-    while (delLoopRunning) {
-        if (std::filesystem::remove("backend/delete_items.txt")) {
-            for (unsigned int i = 0; i < amount; i++) {
-                wh.erase(wh.end() - amount, wh.end());
-            }
+void deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount) {
+    if (std::filesystem::remove("backend/delete_items.txt")) {
+        for (unsigned int i = 0; i < amount; i++) {
+            wh.erase(wh.end() - amount, wh.end());
         }
-        
-        if (!std::filesystem::exists("backend/simulator_info.json")) delLoopRunning = false;
     }
 }

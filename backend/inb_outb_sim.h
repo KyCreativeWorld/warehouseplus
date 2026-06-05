@@ -27,4 +27,4 @@ void outboundShippment(std::vector<ikeaData>& wh, int amount);
 inline unsigned int numInboundShippments;
 inline unsigned int numOutboundShippments;
 
-void startDeleteLoop(std::vector<ikeaData>& wh, unsigned int amount);
+void deleteItemsUpdate(std::vector<ikeaData>& wh, unsigned int amount);
