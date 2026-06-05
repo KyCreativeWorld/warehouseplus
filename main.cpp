@@ -8,7 +8,6 @@
 //#include <algorithm>
 #include "backend/nlohmann/json.hpp"
 #include "backend/ikea_data_struct.h"
-#include "backend/inbound_sort.h"
 #include "backend/read_csv_file.h"
 #include "backend/inb_outb_sim.h"
 #include "backend/bulk_sort.h"
@@ -41,7 +40,7 @@ int main() {
 
     bulkSort(warehouse);
 
-    unsigned int printStop = 10;
+    unsigned int printStop = 100;
     std::cout << std::endl << "ShipmentData (size: " << shipmentData.size() << "):" << std::endl;
     if (shipmentData.size() < 1) { std::cout << "NO ITEMS IN SHIPMENTDATA!!" << std::endl; }
     else {
